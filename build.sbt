@@ -4,10 +4,11 @@ version := "1.0"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.8"
 
 libraryDependencies ++= Seq(
-  "com.evojam" %% "play-elastic4s" % "0.2.1"
+  "com.evojam" %% "play-elastic4s" % "0.2.1",
+  "com.anchor" %% "anchor-models" % "1.0"
 )
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"

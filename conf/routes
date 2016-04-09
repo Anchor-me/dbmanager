@@ -9,3 +9,6 @@ GET     /books/hardcoded @controllers.BookController.getHardcoded()
 GET     /books/:id       @controllers.BookController.get(id: String)
 POST    /books/populate  @controllers.BookController.populate()
 GET     /books           @controllers.BookController.search(q: String)
+
+GET     /goals/:id       @controllers.GoalController.get(id: String)
+POST    /goals/index     @controllers.GoalController.index()
