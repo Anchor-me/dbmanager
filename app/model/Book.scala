@@ -4,8 +4,13 @@ import play.api.libs.json.Json
 
 import org.joda.time.DateTime
 
-case class Book(isbn: String, title: String, author: String, blurb: String, publisher: String,
-  publishDate: DateTime, genres: Set[String]) {
+case class Book(isbn: String,
+                title: String,
+                author: String,
+                blurb: String,
+                publisher: String,
+                publishDate: DateTime,
+                genres: Set[String]) {
 
   require(isbn != null, "id cannot be null")
   require(title != null, "title cannot be null")
@@ -13,7 +18,6 @@ case class Book(isbn: String, title: String, author: String, blurb: String, publ
   require(blurb != null, "blurb cannot be null")
   require(publishDate != null, "publishDate cannot be null")
   require(genres != null, "genres cannot be null")
-
 }
 
 object Book {

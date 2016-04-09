@@ -27,7 +27,7 @@ class BookDao @Inject()(cs: ClusterSetup, elasticFactory: PlayElasticFactory, @N
 
   def bulkIndex(books: Iterable[Book]) = client execute {
     bulk {
-      books map (book => index into indexAndType source book)
+      books map (book => index into indexAndType source book id book.isbn)
     }
   }
 
@@ -36,6 +36,4 @@ class BookDao @Inject()(cs: ClusterSetup, elasticFactory: PlayElasticFactory, @N
   } map (_.as[Book])
   // the .as[T] conversion is available in elastic4s for any T with HitAs[T] instance available.
   // PlayElasticJsonSupport automatically derives HitAs[T] based on Json.Reads[T].
-
-
 }
