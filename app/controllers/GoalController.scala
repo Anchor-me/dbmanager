@@ -4,7 +4,7 @@ import javax.inject.Inject
 import scala.concurrent.ExecutionContext.Implicits.global
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
-import model.{GoalDao}
+import model.GoalDao
 import com.anchor.model._
 import com.anchor.json._
 
@@ -19,6 +19,16 @@ class GoalController @Inject() (goalDao: GoalDao) extends Controller {
 
   def index() = Action.async {
     goalDao.indexGoal(cannedGoal) map { _ => Ok("Goal indexed") }
+  }
+
+  def index(goal: Goal) = Action.async {
+    goalDao.indexGoal(goal) map { _ => Ok("Goal indexed") }
+  }
+
+  def add = Action.async { request =>
+    val json = request.body.asJson.get
+    val goal = json.as[Goal]
+    goalDao.indexGoal(goal) map { _ => Ok(s"Goal ${goal.id} indexed") }
   }
 
   val cannedGoal = Goal (

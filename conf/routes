@@ -12,3 +12,8 @@ GET     /books           @controllers.BookController.search(q: String)
 
 GET     /goals/:id       @controllers.GoalController.get(id: String)
 POST    /goals/index     @controllers.GoalController.index()
+POST    /goals/add     @controllers.GoalController.add
+
+GET     /examples/:id               @controllers.ExampleController.get(id: String)
+POST    /examples/index             @controllers.ExampleController.index()
+POST    /examples/add      @controllers.ExampleController.add
