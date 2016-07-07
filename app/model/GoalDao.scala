@@ -20,4 +20,10 @@ class GoalDao @Inject()(cs: ClusterSetup, elasticFactory: PlayElasticFactory, @N
   def indexGoal(goal: Goal) = client execute {
     index into indexAndType source goal id goal.id.id
   }
+
+  def bulkIndex(goals: Iterable[Goal]) = client execute {
+    bulk {
+      goals map (goal => index into indexAndType source goal id goal.id)
+    }
+  }
 }

@@ -17,12 +17,8 @@ class GoalController @Inject() (goalDao: GoalDao) extends Controller {
     }
   }
 
-  def index() = Action.async {
-    goalDao.indexGoal(cannedGoal) map { _ => Ok("Goal indexed") }
-  }
-
-  def index(goal: Goal) = Action.async {
-    goalDao.indexGoal(goal) map { _ => Ok("Goal indexed") }
+  def index = Action.async {
+    goalDao.indexGoal(cannedGoals.head) map { _ => Ok("Goal indexed") }
   }
 
   def add = Action.async { request =>
@@ -31,12 +27,21 @@ class GoalController @Inject() (goalDao: GoalDao) extends Controller {
     goalDao.indexGoal(goal) map { _ => Ok(s"Goal ${goal.id} indexed") }
   }
 
-  val cannedGoal = Goal (
-    id = Id("1001"),
-    themeId = Id("2002"),
-    summary = "Create Anchor.me",
-    description = "Use all your knowledge and skills to create a life-management system",
-    level = 0,
-    priority = true
+  def populate = Action.async {
+    goalDao.bulkIndex(cannedGoals) map {
+      case resp if !resp.hasFailures => Ok
+      case resp => InternalServerError(resp.failures.map(f => f.failureMessage) mkString ";")
+    }
+  }
+
+  val cannedGoals = Seq (
+    Goal (
+      id = Id("1001"),
+      themeId = Id("2002"),
+      summary = "Create Anchor.me",
+      description = "Use all your knowledge and skills to create a life-management system",
+      level = 0,
+      priority = true
+    )
   )
 }

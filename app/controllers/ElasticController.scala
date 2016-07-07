@@ -34,7 +34,7 @@ class ElasticController @Inject() (cs: ClusterSetup, elasticFactory: PlayElastic
 
   def createIndex = Action.async {
     client execute {
-      create index "library" replicas 0
+      create index "walnut" replicas 0
     } map { _ => Ok("Index created") }
   }
 }

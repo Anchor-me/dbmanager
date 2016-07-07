@@ -2,18 +2,9 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /es/stats        @controllers.ElasticController.getStats()
-POST    /es/index        @controllers.ElasticController.createIndex()
+GET     /es/stats                   @controllers.ElasticController.getStats()
+POST    /es/index                   @controllers.ElasticController.createIndex()
 
-GET     /books/hardcoded @controllers.BookController.getHardcoded()
-GET     /books/:id       @controllers.BookController.get(id: String)
-POST    /books/populate  @controllers.BookController.populate()
-GET     /books           @controllers.BookController.search(q: String)
-
-GET     /goals/:id       @controllers.GoalController.get(id: String)
-POST    /goals/index     @controllers.GoalController.index()
-POST    /goals/add     @controllers.GoalController.add
-
-GET     /examples/:id               @controllers.ExampleController.get(id: String)
-POST    /examples/index             @controllers.ExampleController.index()
-POST    /examples/add      @controllers.ExampleController.add
+GET     /goals/:id                  @controllers.GoalController.get(id: String)
+POST    /goals/index                @controllers.GoalController.index()
+POST    /goals/add                  @controllers.GoalController.add
